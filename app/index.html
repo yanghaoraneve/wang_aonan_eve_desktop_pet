@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>桌宠小楠</title>
+    <link rel="stylesheet" href="/src/styles/pet.css" />
+  </head>
+  <body>
+    <div id="pet-root">
+      <div id="pet-stage">
+        <div id="pet-bubble-panel">
+          <div id="pet-bubble" hidden></div>
+        </div>
+        <canvas id="pet-canvas"></canvas>
+        <form id="pet-mini-chat" hidden>
+          <input
+            id="pet-mini-chat-input"
+            type="text"
+            placeholder="和小楠说点什么"
+            autocomplete="off"
+          />
+          <button type="submit">发送</button>
+        </form>
+      </div>
+      <div id="pet-reminder-popup" hidden>
+        <div class="reminder-card">
+          <span class="reminder-kicker">日程提醒</span>
+          <h2 id="reminder-title">提醒</h2>
+          <p id="reminder-notes"></p>
+          <div class="reminder-actions">
+            <button type="button" data-reminder-action="dismiss">知道了</button>
+            <button type="button" data-reminder-action="chat">打开聊天</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/pet-main.ts"></script>
+  </body>
+</html>

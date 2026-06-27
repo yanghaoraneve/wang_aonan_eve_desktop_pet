@@ -1,0 +1,7 @@
+{
+  "id": "eve",
+  "displayName": "桌宠小楠",
+  "description": "A chibi desktop pet inspired by Wang Aonan EVE, with a delicate face, long red hair, and a white stage outfit.",
+  "spritesheetPath": "spritesheet.webp",
+  "outfitsManifestPath": "outfits-manifest.json"
+}

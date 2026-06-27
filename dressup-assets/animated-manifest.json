@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "assetType": "animated-outfits",
+  "atlas": {
+    "frameWidth": 192,
+    "frameHeight": 208,
+    "columns": 8,
+    "rows": 9,
+    "fps": 8,
+    "displayHeight": 320
+  },
+  "outfits": [
+    {
+      "id": "red_white_dress",
+      "name": "红发白裙",
+      "spritesheet": "animated/red_white_dress/spritesheet.webp",
+      "thumbnail": "animated/red_white_dress/thumbnail.png",
+      "contactSheet": "animated/red_white_dress/contact-sheet.png",
+      "validation": "animated/red_white_dress/validation.json",
+      "sourceRun": "hatch-runs/wang-aonan-eve"
+    },
+    {
+      "id": "black_leather_headband",
+      "name": "黑皮衣发箍",
+      "spritesheet": "animated/black_leather_headband/spritesheet.webp",
+      "thumbnail": "animated/black_leather_headband/thumbnail.png",
+      "contactSheet": "animated/black_leather_headband/contact-sheet.png",
+      "validation": "animated/black_leather_headband/validation.json",
+      "sourceRun": "hatch-runs/eve-black-leather-headband"
+    },
+    {
+      "id": "bamboo_flute_brown",
+      "name": "竹笛棕纱",
+      "spritesheet": "animated/bamboo_flute_brown/spritesheet.webp",
+      "thumbnail": "animated/bamboo_flute_brown/thumbnail.png",
+      "contactSheet": "animated/bamboo_flute_brown/contact-sheet.png",
+      "validation": "animated/bamboo_flute_brown/validation.json",
+      "sourceRun": "hatch-runs/eve-bamboo-flute"
+    }
+  ]
+}

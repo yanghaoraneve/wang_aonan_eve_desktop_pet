@@ -1,0 +1,261 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  user-select: none;
+}
+
+#pet-root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: transparent;
+}
+
+#pet-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#pet-bubble-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  max-width: min(300px, calc(100vw - 24px));
+  margin-bottom: 8px;
+  pointer-events: auto;
+}
+
+#pet-bubble-panel[hidden] {
+  display: none;
+}
+
+#pet-bubble {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #1a1a1e;
+  font-size: 13px;
+  line-height: 1.45;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+#pet-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  background: rgba(255, 255, 255, 0.96);
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transform: rotate(45deg);
+}
+
+#pet-mini-chat {
+  display: flex;
+  width: 100%;
+  max-width: min(300px, calc(100vw - 24px));
+  gap: 6px;
+  margin-top: 6px;
+  padding: 6px;
+  border-radius: 12px;
+  background: rgba(26, 23, 29, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+#pet-mini-chat[hidden] {
+  display: none;
+}
+
+#pet-mini-chat input {
+  min-width: 0;
+  flex: 1;
+  height: 28px;
+  padding: 0 9px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1a1e;
+  font: inherit;
+  font-size: 12px;
+  outline: none;
+  user-select: text;
+}
+
+#pet-mini-chat input:focus {
+  border-color: rgba(217, 77, 104, 0.65);
+}
+
+#pet-mini-chat button {
+  flex: 0 0 auto;
+  height: 28px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 8px;
+  background: #d94d68;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+#pet-canvas {
+  display: block;
+  cursor: grab;
+}
+
+#pet-canvas:active {
+  cursor: grabbing;
+}
+
+#pet-context-menu {
+  position: fixed;
+  z-index: 1000;
+  min-width: 140px;
+  max-height: var(--pet-menu-max-height, min(360px, calc(100vh - 16px)));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 4px 0;
+  border-radius: 8px;
+  background: rgba(32, 32, 36, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.28) transparent;
+}
+
+#pet-context-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+#pet-context-menu::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+#pet-context-menu button {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: #f0f0f0;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+#pet-context-menu button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#pet-context-menu .menu-back {
+  color: #ffd0dc;
+}
+
+#pet-context-menu .menu-title {
+  padding: 6px 16px 4px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
+#pet-context-menu .menu-separator {
+  height: 1px;
+  margin: 4px 0;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+#pet-reminder-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(10, 8, 12, 0.18);
+  pointer-events: auto;
+}
+
+#pet-reminder-popup[hidden] {
+  display: none;
+}
+
+.reminder-card {
+  width: min(320px, calc(100vw - 32px));
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(255, 250, 252, 0.98);
+  color: #21151b;
+  border: 1px solid rgba(217, 77, 104, 0.32);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.34);
+}
+
+.reminder-kicker {
+  display: block;
+  margin-bottom: 6px;
+  color: #d94d68;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.reminder-card h2 {
+  font-size: 18px;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.reminder-card p {
+  min-height: 20px;
+  color: #5f4a53;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.reminder-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.reminder-actions button {
+  height: 30px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 8px;
+  background: #33242c;
+  color: #fff4f7;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.reminder-actions button:first-child {
+  background: #f0e4e8;
+  color: #45323b;
+}

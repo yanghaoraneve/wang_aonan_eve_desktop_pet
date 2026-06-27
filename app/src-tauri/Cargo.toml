@@ -1,0 +1,23 @@
+[package]
+name = "eve-desktop-pet"
+version = "0.1.0"
+description = "桌宠小楠 Q版桌宠"
+authors = ["you"]
+edition = "2021"
+
+[lib]
+name = "eve_desktop_pet_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon", "macos-private-api"] }
+tauri-plugin-shell = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+keyring = { version = "3", features = ["apple-native", "windows-native", "sync-secret-service"] }
+rusqlite = { version = "0.32", features = ["bundled"] }
+dirs = "6"
+tokio = { version = "1", features = ["time"] }

@@ -1,0 +1,31 @@
+[[permission]]
+identifier = "allow-app-commands"
+description = "Allow all custom Xiao Nan desktop pet commands"
+commands.allow = [
+  "get_api_key",
+  "set_api_key",
+  "get_settings",
+  "save_settings",
+  "list_sessions",
+  "create_session",
+  "get_messages",
+  "get_recent_messages",
+  "add_message",
+  "delete_session",
+  "update_session_title",
+  "list_memories",
+  "add_memory",
+  "search_memories",
+  "delete_memory",
+  "clear_memories",
+  "create_reminder",
+  "list_reminders",
+  "complete_reminder",
+  "delete_reminder",
+  "show_chat_window",
+  "show_settings_window",
+  "toggle_pet_visibility",
+  "emit_pet_event",
+  "emit_pet_bubble",
+  "emit_settings_changed"
+]

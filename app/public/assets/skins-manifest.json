@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "recommendedDisplay": {
+    "heightPx": 320,
+    "idleFps": 8
+  },
+  "skins": [
+    {
+      "id": "red_white_dress",
+      "name": "红发白裙",
+      "description": "红色长卷发、白色挂脖裙、银色耳饰，适合作为默认主皮肤。",
+      "file": "assets/skins/01_red_white_dress.png",
+      "anchor": { "x": 201, "y": 768 },
+      "size": { "width": 402, "height": 768 }
+    },
+    {
+      "id": "blonde_white_outfit",
+      "name": "金发白衣",
+      "description": "浅金长发、白色休闲套装、十字项链，偏清冷舞台感。",
+      "file": "assets/skins/02_blonde_white_outfit.png",
+      "anchor": { "x": 187, "y": 768 },
+      "size": { "width": 375, "height": 768 }
+    },
+    {
+      "id": "black_leather_headband",
+      "name": "黑皮衣发箍",
+      "description": "黑发、黑皮衣、彩色怪兽发箍，适合作为俏皮酷感皮肤。",
+      "file": "assets/skins/03_black_leather_headband.png",
+      "anchor": { "x": 186, "y": 768 },
+      "size": { "width": 373, "height": 768 }
+    },
+    {
+      "id": "dotted_scarf_denim",
+      "name": "波点围巾牛仔",
+      "description": "深色长发、黑色波点围巾、宽松牛仔裤，偏日常街头风。",
+      "file": "assets/skins/04_dotted_scarf_denim.png",
+      "anchor": { "x": 179, "y": 768 },
+      "size": { "width": 359, "height": 768 }
+    },
+    {
+      "id": "bamboo_flute_brown",
+      "name": "竹笛棕纱",
+      "description": "深色长发、棕色薄纱舞台装，手持横向竹笛，参考吹笛造型的新皮肤。",
+      "file": "assets/skins/05_bamboo_flute_brown.png",
+      "anchor": { "x": 258, "y": 768 },
+      "size": { "width": 458, "height": 768 }
+    }
+  ]
+}
