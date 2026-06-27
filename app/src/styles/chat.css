@@ -137,12 +137,20 @@ body {
   border-right: 1px solid #322631;
 }
 
-.session-item {
-  display: block;
+.session-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   width: 100%;
+  margin-bottom: 4px;
+  border-radius: 8px;
+}
+
+.session-item {
+  min-width: 0;
+  flex: 1;
   text-align: left;
   padding: 8px 10px;
-  margin-bottom: 4px;
   border: none;
   border-radius: 8px;
   background: transparent;
@@ -154,9 +162,30 @@ body {
   text-overflow: ellipsis;
 }
 
-.session-item.active,
-.session-item:hover {
+.session-delete {
+  flex: 0 0 auto;
+  padding: 5px 7px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: #7e6872;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.session-row.active .session-item,
+.session-row:hover .session-item {
   background: #2b2029;
+  color: #fff;
+}
+
+.session-row:hover .session-delete {
+  background: #2b2029;
+  color: #ffb4c4;
+}
+
+.session-delete:hover {
+  background: #4b2635 !important;
   color: #fff;
 }
 

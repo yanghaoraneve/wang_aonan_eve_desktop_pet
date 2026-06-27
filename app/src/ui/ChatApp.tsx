@@ -8,6 +8,7 @@ import {
   completeReminder,
   createSession,
   createReminder,
+  deleteSession,
   deleteReminder,
   emitPetEvent,
   emitPetBubble,
@@ -58,6 +59,7 @@ function ChatApp() {
   const [scheduleLoading, setScheduleLoading] = useState(false);
   const [scheduleError, setScheduleError] = useState<string | null>(null);
   const [petDockedChat, setPetDockedChat] = useState(false);
+  const [deletingSessionId, setDeletingSessionId] = useState<number | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
   const miniChatSubmitRef = useRef<(text: string) => void>(() => {});
@@ -127,6 +129,33 @@ function ChatApp() {
     setSessionId(id);
     setMessages([]);
     await loadSessions();
+  };
+
+  const handleDeleteSession = async (targetId: number) => {
+    if (deletingSessionId != null) return;
+    setError(null);
+    setDeletingSessionId(targetId);
+    try {
+      await deleteSession(targetId);
+      const remaining = sessions.filter((session) => session.id !== targetId);
+      if (remaining.length === 0) {
+        const id = await createSession("新对话");
+        setSessionId(id);
+        setMessages([]);
+        setSessions([{ id, title: "新对话", createdAt: Date.now() }]);
+        return;
+      }
+
+      if (targetId === sessionId) {
+        setSessionId(remaining[0].id);
+        setMessages([]);
+      }
+      setSessions(remaining);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setDeletingSessionId(null);
+    }
   };
 
   const handleRenameSession = async () => {
@@ -422,14 +451,28 @@ function ChatApp() {
 
       <aside class="session-list">
         {sessions.map((s) => (
-          <button
-            type="button"
-            key={s.id}
-            class={`session-item ${s.id === sessionId ? "active" : ""}`}
-            onClick={() => setSessionId(s.id)}
-          >
-            {s.title}
-          </button>
+          <div class={`session-row ${s.id === sessionId ? "active" : ""}`} key={s.id}>
+            <button
+              type="button"
+              class="session-item"
+              onClick={() => setSessionId(s.id)}
+              title={s.title}
+            >
+              {s.title}
+            </button>
+            <button
+              type="button"
+              class="session-delete"
+              disabled={deletingSessionId === s.id}
+              onClick={(e) => {
+                e.stopPropagation();
+                void handleDeleteSession(s.id);
+              }}
+              title="删除对话"
+            >
+              {deletingSessionId === s.id ? "删除中" : "删除"}
+            </button>
+          </div>
         ))}
       </aside>
 

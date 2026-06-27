@@ -18,9 +18,6 @@
     "core:event:allow-listen",
     "core:event:allow-emit",
     "shell:allow-open",
-    "autostart:allow-enable",
-    "autostart:allow-disable",
-    "autostart:allow-is-enabled",
     "allow-app-commands"
   ]
 }

@@ -65,6 +65,9 @@ async function syncPetWindowSize(renderer: PetRenderer): Promise<void> {
   const win = getCurrentWindow();
   const size = await win.outerSize().catch(() => null);
   const position = await win.outerPosition().catch(() => null);
+  const scaleFactor = await win.scaleFactor().catch(() => 1);
+  const logicalSize = size?.toLogical(scaleFactor) ?? null;
+  const logicalPosition = position?.toLogical(scaleFactor) ?? null;
   const nextWidth = Math.ceil(width + WINDOW_PAD);
   const nextHeight = Math.ceil(
     height + WINDOW_PAD + visibleElementHeight("pet-bubble-panel") +
@@ -73,11 +76,13 @@ async function syncPetWindowSize(renderer: PetRenderer): Promise<void> {
 
   await win.setSize(new LogicalSize(nextWidth, nextHeight));
 
-  if (size && position) {
-    const heightDelta = size.height - nextHeight;
+  if (logicalSize && logicalPosition) {
+    const heightDelta = logicalSize.height - nextHeight;
     if (heightDelta !== 0) {
       await win
-        .setPosition(new LogicalPosition(position.x, position.y + heightDelta))
+        .setPosition(
+          new LogicalPosition(logicalPosition.x, logicalPosition.y + heightDelta),
+        )
         .catch(() => {});
     }
   }
@@ -464,10 +469,16 @@ function setupTauriEvents(
 
   listen<PetSettings>("settings-changed", async (event) => {
     const { petScale, showChatBubble, currentOutfitId } = event.payload;
-    await renderer.loadSpritesheet(getOutfitSpritesheet(outfits, currentOutfitId));
-    renderer.setDisplayScale(clampScale(petScale));
-    setBubbleEnabled(showChatBubble);
-    await syncPetWindowSize(renderer);
+    try {
+      await getCurrentWindow().show().catch(() => {});
+      await renderer.loadSpritesheet(getOutfitSpritesheet(outfits, currentOutfitId));
+      renderer.setDisplayScale(clampScale(petScale));
+      setBubbleEnabled(showChatBubble);
+      await syncPetWindowSize(renderer);
+    } catch (err) {
+      console.error("failed to apply pet settings", err);
+      showBubble("装扮切换失败，我先保持现在这套。");
+    }
   });
 }
 

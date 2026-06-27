@@ -31,8 +31,10 @@ fn tick(app: &AppHandle) -> Result<(), String> {
     let size = pet.outer_size().map_err(|e| e.to_string())?;
     let monitor = pet
         .current_monitor()
-        .map_err(|e| e.to_string())?
-        .ok_or_else(|| "no monitor".to_string())?;
+        .map_err(|e| e.to_string())?;
+    let Some(monitor) = monitor else {
+        return Ok(());
+    };
     let mon_pos = monitor.position();
     let mon_size = monitor.size();
 
