@@ -1,52 +1,56 @@
-# EVE Desktop Pet App
+# 桌宠小楠应用源码
 
-王澳楠 EVE Q版桌宠 — Tauri 2 + TypeScript + Preact
+这里是桌宠小楠的 Tauri 2 应用源码，前端使用 TypeScript + Preact，桌面能力由 Rust/Tauri 提供。
 
-## Prerequisites
+## 开发环境
 
 - Node.js 18+
-- Rust stable (`rustup default stable`)
-- Windows: WebView2 (usually preinstalled on Win10+)
-- macOS: Xcode Command Line Tools
+- Rust stable
+- macOS：Xcode Command Line Tools
+- Windows：WebView2 Runtime
 
-## Development
+## 安装依赖
 
 ```bash
-cd app
 npm install
+```
+
+## 开发运行
+
+```bash
 npm run tauri:dev
 ```
 
-## Build
+## 生产构建
 
 ```bash
-cd app
-npm install
 npm run tauri:build
 ```
 
-Outputs:
-- Windows: `src-tauri/target/release/bundle/msi/` or `nsis/`
-- macOS: `src-tauri/target/release/bundle/dmg/`
+构建输出：
 
-## Usage
+- macOS：`src-tauri/target/release/bundle/dmg/`
+- Windows：`src-tauri/target/release/bundle/msi/` 或 `src-tauri/target/release/bundle/nsis/`
 
-1. Launch the app — a transparent pet window appears on desktop
-2. **Click** — waving animation
-3. **Double-click** — open chat window
-4. **Drag** — move pet; release triggers jump animation
-5. **Screen edges** — pet walks along left/right edges
-6. **Tray icon** — show/hide pet, chat, settings, quit
-7. Configure API Key in Settings (OpenAI-compatible endpoint)
+## 主要目录
 
-## Project Structure
+```text
+src/pet/              # Canvas 桌宠渲染、状态机、动画逻辑
+src/chat/             # 聊天 Agent、模型请求、记忆、日程工具、本地知识库
+src/ui/               # 聊天窗口和设置窗口
+src/styles/           # 桌宠、聊天、设置样式
+src-tauri/            # Rust 后端、托盘、窗口控制、SQLite、设置存储
+public/assets/        # 桌宠图集、换装资源、头像、歌词知识库
+```
 
-- `src/pet/` — Canvas renderer & state machine
-- `src/chat/` — OpenAI-compatible streaming client
-- `src/ui/` — Chat & Settings (Preact)
-- `src-tauri/` — Rust backend (tray, edge walk, SQLite, keychain)
-- `public/assets/` — spritesheet, skins, manifests
+## 常用脚本
 
-## Bundle Size
+```bash
+npm run build         # TypeScript 检查并构建前端
+npm run tauri:dev     # 启动 Tauri 开发版
+npm run tauri:build   # 构建桌面安装包
+```
 
-Release excludes `qa/` dev assets. Runtime assets ~3.5 MB + Tauri binary ~8–15 MB.
+## 配置说明
+
+模型服务配置保存在应用设置中。API Key 会写入本机应用配置文件，不再反复请求钥匙串权限。聊天 Agent 默认使用项目内置的王澳楠 EVE skill prompt，并会读取本地歌词知识库作为补充上下文。
